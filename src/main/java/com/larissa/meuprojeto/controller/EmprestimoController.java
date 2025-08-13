@@ -3,7 +3,6 @@ package com.larissa.meuprojeto.controller;
 import com.larissa.meuprojeto.data.dto.request.EmprestimoRequest;
 import com.larissa.meuprojeto.data.dto.response.EmprestimoResponse;
 import com.larissa.meuprojeto.service.EmprestimoService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @RestController
 @RequestMapping("/emprestimos")
 @Tag(name = "Emprestimo", description = "Endpoints relacionados à área de empréstimo")
@@ -81,7 +79,7 @@ public class EmprestimoController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @PutMapping("/atualizar/{idEmprestimo}")
+    @PutMapping("/{idEmprestimo}")
     public ResponseEntity<EmprestimoResponse> atualizarEmprestimo(
             @PathVariable Long idEmprestimo,
             @RequestBody EmprestimoRequest request) {
@@ -97,7 +95,7 @@ public class EmprestimoController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @DeleteMapping("/delete/{idEmprestimo}")
+    @DeleteMapping("/{idEmprestimo}")
     public ResponseEntity<String> deletarEmprestimo(@PathVariable Long idEmprestimo) {
         emprestimoService.deletarEmprestimo(idEmprestimo);
         return ResponseEntity.ok("Empréstimo deletado com sucesso.");

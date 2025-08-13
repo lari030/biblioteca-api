@@ -40,7 +40,7 @@ public class PessoaController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @GetMapping("/pessoas")
+    @GetMapping("/all")
     public ResponseEntity<List<PessoaResponse>> listarTodas() {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaService.listarTodas());
     }
@@ -70,7 +70,7 @@ public class PessoaController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @PostMapping("/pessoas")
+    @PostMapping("/criar")
     public ResponseEntity<PessoaResponse> criarPessoa(@Valid @RequestBody PessoaRequest pessoaRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.criarPessoa(pessoaRequest));
     }
@@ -86,7 +86,7 @@ public class PessoaController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @PutMapping("/pessoas/{idPessoa}")
+    @PutMapping("/{idPessoa}")
     public ResponseEntity<PessoaResponse> atualizarPessoa(@PathVariable Long idPessoa, @RequestBody PessoaRequest pessoaRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaService.atualizarPessoa(idPessoa, pessoaRequest));
     }
@@ -100,7 +100,7 @@ public class PessoaController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @DeleteMapping("/pessoas/{idPessoa}")
+    @DeleteMapping("/{idPessoa}")
     public ResponseEntity<String> deletarPessoa(@PathVariable Long idPessoa) {
         pessoaService.deletarPessoa(idPessoa);
         return ResponseEntity.ok("Pessoa deletada com sucesso.");

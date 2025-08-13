@@ -27,6 +27,7 @@ public class SecurityConfigurations {
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                          .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                          .requestMatchers(HttpMethod.POST, "/auth/registrar").permitAll()
         
@@ -35,13 +36,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.DELETE, "/livros/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/livros/**").hasAnyRole("ADMIN", "USER")
 
-                        // Pessoas
                         .requestMatchers(HttpMethod.POST, "/pessoas/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/pessoas/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/pessoas/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/pessoas/**").hasAnyRole("ADMIN", "USER")
 
-                        // Empréstimos
                         .requestMatchers(HttpMethod.POST, "/emprestimos/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.PUT, "/emprestimos/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/emprestimos/**").hasAnyRole("ADMIN", "USER")

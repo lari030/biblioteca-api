@@ -3,23 +3,17 @@ package com.larissa.meuprojeto.controller;
 import com.larissa.meuprojeto.data.dto.request.LivroRequest;
 import com.larissa.meuprojeto.data.dto.response.LivroResponse;
 import com.larissa.meuprojeto.service.LivroService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
-
-
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -39,7 +33,7 @@ public class LivroController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @GetMapping("/livros")
+    @GetMapping("/all")
     public ResponseEntity<List<LivroResponse>> listarTodos() {
         return ResponseEntity.status(HttpStatus.OK).body(livroService.listarTodos());
     }
@@ -85,7 +79,7 @@ public class LivroController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @PutMapping("/atualizar/{idLivro}")
+    @PutMapping("/{idLivro}")
     public ResponseEntity<LivroResponse> atualizarLivro(@PathVariable Long idLivro, @RequestBody LivroRequest livroRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(livroService.atualizarLivro(idLivro, livroRequest));
     }
@@ -99,7 +93,7 @@ public class LivroController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @DeleteMapping("/delete/{idLivro}")
+    @DeleteMapping("/{idLivro}")
     public ResponseEntity<String> deletarLivro(@PathVariable Long idLivro) {
         livroService.deletarLivro(idLivro);
         return ResponseEntity.ok("Livro deletado com sucesso.");

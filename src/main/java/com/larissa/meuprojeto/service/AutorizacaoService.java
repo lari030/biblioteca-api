@@ -9,7 +9,9 @@ import com.larissa.meuprojeto.repository.UsuarioRepository;
 
 @Service
 public class AutorizacaoService implements UserDetailsService{
-
+  
+//utilizado pelo Spring Security durante o processo de autenticação
+//para buscar o usuário no banco de dados.
 @Autowired
 UsuarioRepository usuarioRepository;
     @Override
