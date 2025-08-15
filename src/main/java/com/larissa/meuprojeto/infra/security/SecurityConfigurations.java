@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.larissa.meuprojeto.exceptions.AcessoNegado;
+import com.larissa.meuprojeto.exceptions.Erro403;
 
 import org.springframework.http.HttpMethod;
 
@@ -24,7 +24,7 @@ import org.springframework.http.HttpMethod;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurations {
     @Autowired
-    AcessoNegado acessoNegado;
+    Erro403 erro403;
     @Autowired
     SecurityFilter securityFilter;
 
@@ -54,9 +54,9 @@ public class SecurityConfigurations {
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exception -> exception
-            .accessDeniedHandler(acessoNegado) 
+            .accessDeniedHandler(erro403)    
+            .authenticationEntryPoint(erro403) 
         )
-            
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
