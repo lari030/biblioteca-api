@@ -11,7 +11,6 @@ public record EmprestimoRequest(
     @NotNull(message = "ID do livro é obrigatório")
     Long livroId,
     
-    @NotNull(message = "Data de empréstimo é obrigatória")
     LocalDate dataEmprestimo,
 
     LocalDate dataDevolucao

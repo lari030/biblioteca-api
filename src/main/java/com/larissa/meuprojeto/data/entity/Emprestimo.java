@@ -36,7 +36,9 @@ public class Emprestimo {
      public Emprestimo(EmprestimoRequest emprestimoRequest, Pessoa pessoa, Livro livro) {
         this.pessoa = pessoa;
         this.livro = livro;
-        this.dataEmprestimo = emprestimoRequest.dataEmprestimo();
+        this.dataEmprestimo = emprestimoRequest.dataEmprestimo() != null 
+                            ? emprestimoRequest.dataEmprestimo() 
+                            : LocalDate.now();
         this.dataDevolucao = emprestimoRequest.dataDevolucao();
     }
    

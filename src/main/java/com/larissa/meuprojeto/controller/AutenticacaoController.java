@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,7 +50,9 @@ public class AutenticacaoController {
     )
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid AutenticacaoRequest request) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(request.login(), request.password());
+        var usernamePassword = new UsernamePasswordAuthenticationToken(
+            request.login(), request.password()
+        );
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.gerarToken((Usuario) auth.getPrincipal());
         return ResponseEntity.ok(new LoginResponse(token));
@@ -64,7 +67,9 @@ public class AutenticacaoController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-    @PostMapping("/registrar")
+
+   @PreAuthorize("!(#request.role == T(com.larissa.meuprojeto.data.entity.UsuarioRole).ADMIN) or (isAuthenticated() and hasRole('ADMIN'))")
+   @PostMapping("/registrar")
     public ResponseEntity<Void> registrar(@RequestBody @Valid RegistroRequest request) {
         if (usuarioRepository.findByLogin(request.login()) != null) {
             return ResponseEntity.badRequest().build();
@@ -73,6 +78,7 @@ public class AutenticacaoController {
         var encryptedPassword = new BCryptPasswordEncoder().encode(request.password());
         Usuario newUsuario = new Usuario(request.login(), encryptedPassword, request.role());
         this.usuarioRepository.save(newUsuario);
+
         return ResponseEntity.ok().build();
     }
 }
