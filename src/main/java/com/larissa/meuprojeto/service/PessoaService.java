@@ -32,6 +32,13 @@ public class PessoaService {
 
     //cadastrar uma nova pessoa
     public PessoaResponse criarPessoa(PessoaRequest pessoaRequest) {
+     if (pessoaRepository.existsByCpf(pessoaRequest.cpf())) {
+        throw new IllegalArgumentException("CPF já cadastrado.");
+    }
+    if (pessoaRepository.existsByEmail(pessoaRequest.email())) {
+        throw new IllegalArgumentException("Email já cadastrado.");
+    }
+
     Pessoa pessoa = new Pessoa();
     pessoa.setNome(pessoaRequest.nome());
     pessoa.setCpf(pessoaRequest.cpf());
