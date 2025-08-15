@@ -1,4 +1,5 @@
-package com.larissa.meuprojeto.exceptions;
+package com.larissa.meuprojeto.exceptions.general;
+
 
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,6 @@ public class Erro403 implements AccessDeniedHandler, AuthenticationEntryPoint {
     private void writeResponse(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
-        response.getWriter().write("{\"status\":403,\"message\":\"Você não tem permissão para acessar este recurso.\"}");
+        response.getWriter().write("{\"status\":403,\"message\":\"Voce nao tem permissao para acessar este recurso.\"}");
     }
 }

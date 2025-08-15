@@ -13,8 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.larissa.meuprojeto.exceptions.Erro403;
-
+import com.larissa.meuprojeto.exceptions.general.Erro403;
 import org.springframework.http.HttpMethod;
 
 

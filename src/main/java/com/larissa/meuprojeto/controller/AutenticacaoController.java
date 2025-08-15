@@ -67,9 +67,8 @@ public class AutenticacaoController {
             @ApiResponse(responseCode = "500", description = "Erro interno")
         }
     )
-
-   @PreAuthorize("!(#request.role == T(com.larissa.meuprojeto.data.entity.UsuarioRole).ADMIN) or (isAuthenticated() and hasRole('ADMIN'))")
-   @PostMapping("/registrar")
+    @PreAuthorize("#request.role != T(com.larissa.meuprojeto.data.entity.UsuarioRole).ADMIN")
+    @PostMapping("/registrar")
     public ResponseEntity<Void> registrar(@RequestBody @Valid RegistroRequest request) {
         if (usuarioRepository.findByLogin(request.login()) != null) {
             return ResponseEntity.badRequest().build();

@@ -5,7 +5,7 @@ import com.larissa.meuprojeto.data.dto.response.EmprestimoResponse;
 import com.larissa.meuprojeto.data.entity.Emprestimo;
 import com.larissa.meuprojeto.data.entity.Livro;
 import com.larissa.meuprojeto.data.entity.Pessoa;
-import com.larissa.meuprojeto.exceptions.LivroJaEmprestadoExcecao;
+import com.larissa.meuprojeto.exceptions.general.LivroJaEmprestadoExcecao;
 import com.larissa.meuprojeto.exceptions.general.EntidadeNaoEncontradaExcecao;
 import com.larissa.meuprojeto.repository.EmprestimoRepository;
 import com.larissa.meuprojeto.repository.LivroRepository;

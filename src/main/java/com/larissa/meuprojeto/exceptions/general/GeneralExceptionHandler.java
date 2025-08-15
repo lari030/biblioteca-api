@@ -1,6 +1,4 @@
 package com.larissa.meuprojeto.exceptions.general;
-
-import com.larissa.meuprojeto.exceptions.LivroJaEmprestadoExcecao;
 import com.larissa.meuprojeto.exceptions.RestErrorMessage;
 
 import java.util.stream.Collectors;
@@ -42,6 +40,11 @@ public class GeneralExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-   
+   @ExceptionHandler(RecursoDuplicadoExcecao.class)
+    public ResponseEntity<RestErrorMessage> tratarRecursoDuplicado(RecursoDuplicadoExcecao ex) {
+    RestErrorMessage erro = new RestErrorMessage(HttpStatus.BAD_REQUEST, ex.getMessage());
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+}
+
    
 }

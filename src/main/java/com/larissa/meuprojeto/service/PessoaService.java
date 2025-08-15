@@ -6,6 +6,8 @@ import com.larissa.meuprojeto.data.dto.response.PessoaResponse;
 import com.larissa.meuprojeto.data.entity.Pessoa;
 import com.larissa.meuprojeto.repository.PessoaRepository;
 import com.larissa.meuprojeto.exceptions.general.EntidadeNaoEncontradaExcecao;
+import com.larissa.meuprojeto.exceptions.general.RecursoDuplicadoExcecao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -32,12 +34,14 @@ public class PessoaService {
 
     //cadastrar uma nova pessoa
     public PessoaResponse criarPessoa(PessoaRequest pessoaRequest) {
-     if (pessoaRepository.existsByCpf(pessoaRequest.cpf())) {
-        throw new IllegalArgumentException("CPF já cadastrado.");
+    if (pessoaRepository.existsByCpf(pessoaRequest.cpf())) {
+    throw new RecursoDuplicadoExcecao("CPF já cadastrado.");
     }
+
     if (pessoaRepository.existsByEmail(pessoaRequest.email())) {
-        throw new IllegalArgumentException("Email já cadastrado.");
+    throw new RecursoDuplicadoExcecao("Email já cadastrado.");
     }
+
 
     Pessoa pessoa = new Pessoa();
     pessoa.setNome(pessoaRequest.nome());

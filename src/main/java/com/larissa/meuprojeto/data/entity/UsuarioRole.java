@@ -1,5 +1,7 @@
 package com.larissa.meuprojeto.data.entity;
 
+
+
 public enum UsuarioRole {
     ADMIN("admin"),
     USER("user");
