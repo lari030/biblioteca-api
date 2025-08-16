@@ -86,7 +86,7 @@ public class PessoaService {
     pessoaRepository.save(pessoa);
     return new PessoaResponse(pessoa);
     }
-    //deletar um livro
+    //deletar uma pessoa
     public void deletarPessoa(Long id) {
         Pessoa pessoa = buscarPessoaPorId(id);
         pessoaRepository.delete(pessoa);
